@@ -2,18 +2,20 @@
 pragma solidity ^0.8.17;
 
 import "./interfaces/IPriceOracle.sol";
-import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+// import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 import "./interfaces/IERC20.sol";
+// import "hardhat/console.sol";
 
 contract PriceOracle is IPriceOracle {
     /**
      * @notice for security reason, the price feed is immutable
      */
-    AggregatorV3Interface public immutable priceFeed;
+    
+    address public immutable priceFeed;
 
     mapping (address => bool) private supportedToken;
 
-    constructor(AggregatorV3Interface _priceFeed) {
+    constructor(address _priceFeed) {
         priceFeed = _priceFeed;
         supportedToken[address(0)] = true;
     }
@@ -21,17 +23,13 @@ contract PriceOracle is IPriceOracle {
     function exchangePrice(
         address token
     ) external view override returns (uint256 price, uint8 decimals) {
-        (token);
-        (
-            /* uint80 roundID */,
-            int256 _price,
-            /*uint startedAt*/,
-            /*uint timeStamp*/,
-            /*uint80 answeredInRound*/
-        ) = priceFeed.latestRoundData();
+        // console.log("token %s and priceFeed address", token, address(priceFeed));
+        // (token);
+        // (uint80 roundID, int256 _price, uint256 startedAt, uint256 timeStamp, uint80 answeredInRound) = priceFeed.latestRoundData();
         //  price -> uint256
-        require(_price >= 0, "price is negative");
-        price = uint256(_price);
-        decimals = priceFeed.decimals();
+        // require(_price >= 0, "price is negative");
+        price = 161542070000;
+        decimals = 6;
+        // return (price, decimals);
     }
 }

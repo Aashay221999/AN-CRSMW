@@ -15,10 +15,10 @@ contract MockOracle {
             uint80 answeredInRound
         )
     {
-	return (92233720368547799018,161542070000, 1675661279,1675661279,92233720368547799018);
+	return (92233720368547799018,161542070000, 1677066209,1678066209,92233720368547799018);
 
     }
    function decimals() external view returns (uint8){
-        return 8;
+        return 6;
     }
 }
