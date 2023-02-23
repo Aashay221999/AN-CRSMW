@@ -3,6 +3,8 @@
 pragma solidity ^0.8.12;
 
 import "./ClaimHolder.sol";
+import "hardhat/console.sol";
+
 
 contract ClaimVerifier {
     event ClaimValid(ClaimHolder _identity, uint256 claimType);
@@ -46,9 +48,10 @@ contract ClaimVerifier {
         (foundClaimType, scheme, issuer, sig, data, ) = _identity.getClaim(
             claimId
         );
-
+        bytes memory dataPacked = abi.encodePacked(address(_identity), claimType, data);
+        console.logBytes(dataPacked);
         bytes32 dataHash = keccak256(
-            abi.encodePacked(_identity, claimType, data)
+            abi.encodePacked(address(_identity), claimType, data)
         );
         bytes32 ethSignedMessageHash = keccak256(
             abi.encodePacked("\x19Ethereum Signed Message:\n32", dataHash)
@@ -56,10 +59,17 @@ contract ClaimVerifier {
 
         // Recover address of data signer
         address recovered = getRecoveredAddress(sig, ethSignedMessageHash);
-
+        
         // Take hash of recovered address
         bytes32 hashedAddr = keccak256(abi.encodePacked(recovered));
-
+        // , dataHash %s, ethSignedMessage %s, recoveredAdd %s, hashrecoveredAdd %s
+        // dataHash, ethSignedMessageHash, recovered, hashedAddr
+        console.logBytes32(claimId);
+        console.logBytes32(dataHash);
+        console.logBytes32(ethSignedMessageHash);
+        console.log("recoveredaddr %s", recovered);
+        console.logBytes32(hashedAddr);
+        
         // Does the trusted identifier have they key which signed the user's claim?
         return trustedClaimIssuer.keyHasPurpose(hashedAddr, 3);
     }
