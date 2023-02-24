@@ -25,6 +25,11 @@ Git Clone  for Private Repo `git clone https://username@github.com/username/repo
 1. `cd hardhat`
 2. `npm install`
 3. `npx hardhat compile`
+4. Fix issues with soul-wallet-lib
+   ```
+    cd node_modules/soul-wallet-lib
+    npm run rebuild
+   ```
 
 ## Instructions for Deploying AA-Contracts, Starting bundler
 
