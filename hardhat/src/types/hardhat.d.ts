@@ -113,6 +113,14 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.BaseAccount__factory>;
     getContractFactory(
+      name: "ClaimHolder",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ClaimHolder__factory>;
+    getContractFactory(
+      name: "ClaimVerifier",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ClaimVerifier__factory>;
+    getContractFactory(
       name: "DefaultCallbackHandler",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.DefaultCallbackHandler__factory>;
@@ -177,6 +185,14 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC721TokenReceiver__factory>;
     getContractFactory(
+      name: "IERC725v1",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC725v1__factory>;
+    getContractFactory(
+      name: "IERC735",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC735__factory>;
+    getContractFactory(
       name: "IERC777TokensRecipient",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC777TokensRecipient__factory>;
@@ -200,6 +216,10 @@ declare module "hardhat/types/runtime" {
       name: "IStakeManager",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IStakeManager__factory>;
+    getContractFactory(
+      name: "KeyHolder",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.KeyHolder__factory>;
     getContractFactory(
       name: "IERC20",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -387,6 +407,16 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.BaseAccount>;
     getContractAt(
+      name: "ClaimHolder",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ClaimHolder>;
+    getContractAt(
+      name: "ClaimVerifier",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ClaimVerifier>;
+    getContractAt(
       name: "DefaultCallbackHandler",
       address: string,
       signer?: ethers.Signer
@@ -467,6 +497,16 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.IERC721TokenReceiver>;
     getContractAt(
+      name: "IERC725v1",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC725v1>;
+    getContractAt(
+      name: "IERC735",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC735>;
+    getContractAt(
       name: "IERC777TokensRecipient",
       address: string,
       signer?: ethers.Signer
@@ -496,6 +536,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.IStakeManager>;
+    getContractAt(
+      name: "KeyHolder",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.KeyHolder>;
     getContractAt(
       name: "IERC20",
       address: string,

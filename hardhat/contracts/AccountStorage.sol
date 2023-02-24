@@ -6,6 +6,8 @@ import "./interfaces/IGuardianControl.sol";
 import "./interfaces/ILogicUpgradeControl.sol";
 import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 import "./utils/upgradeable/Initializable.sol";
+import "./interfaces/IERC725v1.sol";
+import "./interfaces/IERC735.sol";
 
 library AccountStorage {
     bytes32 private constant ACCOUNT_SLOT = keccak256("ERC4337_ACCOUNT_SLOT");
@@ -52,7 +54,21 @@ library AccountStorage {
         uint256[50] __gap_3;
         /// └───────────────────┘
 
+
+
+        /// ┌───────────────────┐
+        /// │     keyholder      │
+        IERC725v1.KeyHolderLayout keyholder;     // KeyHolder.sol
+        uint256[50] __gap_4;
+        /// └───────────────────┘
         
+
+
+        /// ┌───────────────────┐
+        /// │     claimholder      │
+        IERC735.ClaimHolderLayout claimholder;     // ClaimHolder.sol
+        uint256[50] __gap_5;
+        /// └
     }
 
     function layout() internal pure returns (Layout storage l) {

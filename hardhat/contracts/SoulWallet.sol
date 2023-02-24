@@ -14,6 +14,7 @@ import "./helpers/Calldata.sol";
 import "./guardian/GuardianControl.sol";
 import "./AccountStorage.sol";
 import "./ACL.sol";
+import "./ClaimHolder.sol";
 import "./DefaultCallbackHandler.sol";
 import "./utils/upgradeable/logicUpgradeControl.sol";
 import "./utils/upgradeable/Initializable.sol";
@@ -30,7 +31,8 @@ contract SoulWallet is
     GuardianControl,
     LogicUpgradeControl,
     ACL,
-    DefaultCallbackHandler
+    DefaultCallbackHandler,
+    ClaimHolder
 {
     using AccountStorage for AccountStorage.Layout;
 
@@ -94,6 +96,18 @@ contract SoulWallet is
             _guardianDelay,
             _guardian
         );
+
+        // set keyholder contract variables contract address and delay
+        IERC725v1.KeyHolderLayout storage keyholderLayout = layout
+            .keyholder;
+        
+        // keyholde constructor logic
+        bytes32 _key = keccak256(abi.encodePacked(_owner));
+        keyholderLayout.keys[_key].key = _key;
+        keyholderLayout.keys[_key].purpose = 1;
+        keyholderLayout.keys[_key].keyType = 1;
+        keyholderLayout.keysByPurpose[1].push(_key);
+        emit KeyAdded(_key, keyholderLayout.keys[_key].purpose, 1);
     }
 
     // solhint-disable-next-line no-empty-blocks

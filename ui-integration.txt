@@ -1,0 +1,16 @@
+Sign UP Button when pressed
+    1. Create a random signer (key, address) 
+    2. Obtain the wallet address   
+
+Using metamask, transfer eth and usdc
+
+Activate Button pressed 
+    Activate UserOperation function
+
+Transfer Buttons
+
+All Deploy Buttons 
+
+
+
+

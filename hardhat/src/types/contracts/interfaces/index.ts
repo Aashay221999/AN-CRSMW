@@ -7,6 +7,8 @@ export type { IAggregator } from "./IAggregator";
 export type { ICreate2Deployer } from "./ICreate2Deployer";
 export type { IERC1155TokenReceiver } from "./IERC1155TokenReceiver";
 export type { IERC721TokenReceiver } from "./IERC721TokenReceiver";
+export type { IERC725v1 } from "./IERC725v1";
+export type { IERC735 } from "./IERC735";
 export type { IERC777TokensRecipient } from "./IERC777TokensRecipient";
 export type { IEntryPoint } from "./IEntryPoint";
 export type { IGuardianControl } from "./IGuardianControl";

@@ -7,6 +7,8 @@ export { IAggregator__factory } from "./IAggregator__factory";
 export { ICreate2Deployer__factory } from "./ICreate2Deployer__factory";
 export { IERC1155TokenReceiver__factory } from "./IERC1155TokenReceiver__factory";
 export { IERC721TokenReceiver__factory } from "./IERC721TokenReceiver__factory";
+export { IERC725v1__factory } from "./IERC725v1__factory";
+export { IERC735__factory } from "./IERC735__factory";
 export { IERC777TokensRecipient__factory } from "./IERC777TokensRecipient__factory";
 export { IEntryPoint__factory } from "./IEntryPoint__factory";
 export { IGuardianControl__factory } from "./IGuardianControl__factory";
