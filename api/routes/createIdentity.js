@@ -1,8 +1,8 @@
-const express = require("express")
+const express = require("express");
 
-const router = express.Router()
+const router = express.Router();
 
-const fs = require('fs');
+const fs = require("fs");
 
 // API to submit new identity creation for issuer and holder
 // URL: http://localhost:5000/api/identity/createIdentity
@@ -14,13 +14,15 @@ const fs = require('fs');
   "role": "IDENTITY"
 }
 */
-router.post('/createIdentity', (req, res) => {
-    const identity = req.body; 
-    const data = JSON.parse(fs.readFileSync('./data/identities.json'));
-    data.push(identity);
-    fs.writeFileSync('./data/identities.json', JSON.stringify(data));
-    res.status(201).json(identity);
+router.post("/createIdentity", (req, res) => {
+  const identity = req.body;
+  let data = [];
+  if (fs.existsSync("./data/identities.json")) {
+    data = JSON.parse(fs.readFileSync("./data/identities.json"));
+  }
+  data.push(identity);
+  fs.writeFileSync("./data/identities.json", JSON.stringify(data));
+  res.status(201).json(identity);
 });
- 
 
 module.exports = router;
