@@ -5,6 +5,7 @@ import { IApproveToken, IUserOpReceipt, SoulWalletLib, UserOperation } from 'sou
 import { USDCoin__factory, TokenPaymaster__factory, SingletonFactory__factory, EntryPoint__factory, ERC20__factory } from "../src/types/index";
 import { Utils } from "./aa-signer-utils";
 import * as dotenv from 'dotenv'
+import fs from "fs";
 
 dotenv.config()
 
@@ -58,6 +59,7 @@ let mockGasFee = {
 
 let etherProvider : ETHERS.providers.BaseProvider;
 async function main() {
+    let outputConfig: any = {};
 
     let EOA = (await ethers.getSigners())[0]; // Deployement EOA
     let USDCContractAddress = ''; // MockUSDC Contract Address
@@ -72,6 +74,7 @@ async function main() {
     }
    
     console.log("EOA Address which is used for deployment : ", EOA.address);
+    outputConfig.eoaAddress = EOA.address;
 
     /*
         Step 1 - Deploy SingletonFactory, USDCCoin and USDCPriceFeed Contracts
@@ -101,6 +104,9 @@ async function main() {
         console.log("AA Script Log : SingletonFactory Contract Address : ", create2.address);
         console.log("AA Script Log : USDCoin Contract Address : ", usdc.address);
         console.log("AA Script Log : USDCPriceFeed Contract Address : ", USDCPriceFeedAddress);
+        outputConfig.singletonFactoryAddress = create2.address;
+        outputConfig.usdcCoinContractAddress = usdc.address;
+        outputConfig.usdcPriceFeedContractAddress = USDCPriceFeedAddress;
     } else {
         soulWalletLib = new SoulWalletLib();
         etherProvider = ethers.provider;
@@ -139,6 +145,7 @@ async function main() {
         etherProvider
     )
     console.log("AA Script Log : Deployed EntryPoint Contract at ", EntryPointAddress);
+    outputConfig.entryPointAddress = EntryPointAddress;
     
     
 /*
@@ -158,6 +165,7 @@ async function main() {
         etherProvider
     )
     console.log("AA Script Log : Deployed SoulWallet Logic Contract at ", WalletLogicAddress);
+    outputConfig.walletLogicAddress = WalletLogicAddress;
             
 
     /*
@@ -172,6 +180,7 @@ async function main() {
     
     const walletFactoryAddress = soulWalletLib.Utils.deployFactory.getAddress(WalletLogicAddress);
     console.log("SoulWallet Factory Contract Address - ", walletFactoryAddress)
+    outputConfig.walletFactoryAddress = walletFactoryAddress;
     if (await ethers.provider.getCode(walletFactoryAddress) === '0x') {
 
         const increaseGasLimit = (estimatedGasLimit: BigNumber) => {
@@ -217,6 +226,7 @@ async function main() {
         etherProvider
     )
     console.log("AA Script Log : Deployed PriceOracle Contract at ", PriceOracleAddress);
+    outputConfig.priceOracleAddress = PriceOracleAddress;
                  
     
 /*
@@ -244,6 +254,7 @@ async function main() {
         etherProvider
     )
     console.log("AA Script Log : Deployed TokenPaymaster Contract at ", TokenPaymasterAddress);
+    outputConfig.tokenPaymasterAddress = TokenPaymasterAddress;
     const TokenPaymaster = await TokenPaymaster__factory.connect(TokenPaymasterAddress, EOA);
     console.log("AA Script Log :  TokenPaymaster Owner is ", await TokenPaymaster.owner());
     await TokenPaymaster.setToken([USDCContractAddress], [PriceOracleAddress]);
@@ -279,7 +290,11 @@ async function main() {
         etherProvider
     )
     console.log("AA Script Log : Deployed GuardianMultiSigWallet Logic Contract at ", GuardianLogicAddress);
-    
+    outputConfig.guardianLogicAddress = GuardianLogicAddress;
+    const outFileName = "contract-addresses.json"
+    console.log(`Writing contract address to ${outFileName}`)
+    fs.writeFileSync(`./${outFileName}`, JSON.stringify(outputConfig, null, 4), "utf-8")
+    console.log("Done")
 }
 
 
