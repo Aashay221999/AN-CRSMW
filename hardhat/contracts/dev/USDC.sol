@@ -19,6 +19,10 @@ contract USDCoin is ERC20, Ownable, ERC20Permit {
         _mint(to, amount);
     }
 
+    function burn(address to, uint256 amount) public onlyOwner {
+        _burn(to, amount);
+    }
+
     function approve(
         address spender,
         uint256 amount
