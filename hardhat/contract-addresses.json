@@ -1,0 +1,12 @@
+{
+    "eoaAddress": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+    "singletonFactoryAddress": "0x1291Be112d480055DaFd8a610b7d1e203891C274",
+    "usdcCoinContractAddress": "0x5f3f1dBD7B74C6B46e8c44f98792A1dAf8d69154",
+    "usdcPriceFeedContractAddress": "0xCD8a1C3ba11CF5ECfa6267617243239504a98d90",
+    "entryPointAddress": "0x08C08a3c00bCcBB1D45AFB76927DA0BDFe5D0c34",
+    "walletLogicAddress": "0xAC43A4491Ec2c7E4dd28B85411f728d5E22C92FA",
+    "walletFactoryAddress": "0xD0FCA7Aee5b9E7031192a6B25290616E781dA564",
+    "priceOracleAddress": "0x2B9b978AA513bd16a1Da113721B295CFe932EADa",
+    "tokenPaymasterAddress": "0xF1188081BC78F14C9B9450011b368620dB9deF38",
+    "guardianLogicAddress": "0x93663839B990173768e9F18C057A8e4fa6e79842"
+}

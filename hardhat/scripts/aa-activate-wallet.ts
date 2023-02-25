@@ -28,6 +28,7 @@ import * as dotenv from 'dotenv'
 import { Address } from 'ethereumjs-util';
 // import SOUL_WALLET_ABI from '../artifacts/contracts/SoulWallet.sol/SoulWallet.json';
 import IERC20_ABI from "../artifacts/contracts/dev/USDC.sol/USDCoin.json";
+import contractAddresses from "../contract-addresses.json";
 
 const SOUL_WALLET_INTERFACE = new ETHERS.utils.Interface(
   [
@@ -97,15 +98,15 @@ let USDCPriceFeedAddress = ''; // MockPriceFeed Contract Address
 let eip1559GasFee:any; // ERP1559 GasPrice Details
 let soulWalletLib:any; // Configured SoulWalletLib 
 
-const singletonFactoryAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
-const usdcCoinContractAddress = '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512';
-const usdcPriceFeedContractAddress = '0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9';
-const EntryPointAddress='0x25ddC9Aab8f335c4754ac21061C61240d846C4b5';
-const WalletLogicAddress = '0xb3f3c82B58976f18E8532164c756B5Df0a9dec86';
-const walletFactoryAddress = '0x632b291Cf33b8c8d72887fc8d533c482273162Da';
-const PriceOracleAddress = '0x6961F3A8FE7b4C9d933ef84CD01d657d71115023';
-const TokenPaymasterAddress = '0x2C409D963A7EBf08f1370a6C6adAf6dED38b246A';
-const GuardianLogicAddress = '0x14c1d9B76610395e8CFc7BaEa1eF62095f37Fdcf';
+const singletonFactoryAddress = contractAddresses.singletonFactoryAddress;
+const usdcCoinContractAddress = contractAddresses.usdcCoinContractAddress;
+const usdcPriceFeedContractAddress = contractAddresses.usdcPriceFeedContractAddress;
+const EntryPointAddress= contractAddresses.entryPointAddress;
+const WalletLogicAddress = contractAddresses.walletLogicAddress;
+const walletFactoryAddress = contractAddresses.walletFactoryAddress;
+const PriceOracleAddress = contractAddresses.priceOracleAddress;
+const TokenPaymasterAddress = contractAddresses.tokenPaymasterAddress;
+const GuardianLogicAddress = contractAddresses.guardianLogicAddress;
 console.log("AA Activate Script Log : singletonFactoryAddress is : ", singletonFactoryAddress);
 console.log("AA Activate Script Log : usdcCoinContractAddress is : ", usdcCoinContractAddress);
 console.log("AA Activate Script Log : usdcPriceFeedContractAddress is : ", usdcPriceFeedContractAddress);
