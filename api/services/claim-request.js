@@ -28,7 +28,7 @@ class ClaimManager {
       }
       parsedExistingData.push(jsonContent);
 
-      fs.writeFile(
+      fs.writeFileSync(
         "./data/claim-signing-request.json",
         JSON.stringify(parsedExistingData, null, 2),
         { encoding: "utf8" },
