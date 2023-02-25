@@ -11,9 +11,9 @@ const fs = require('fs');
   "walletAddress": "0x5a1f5d5c057d967f8225621ae5b5d82bcbf7f810"
 }
 */
-router.get('/getIdentity', (req, res) => {
-  console.log(req.body);
-  const { walletAddress } = req.body;
+router.get('/getIdentity/:walletAddress', (req, res) => {
+  const { walletAddress } = req.params;
+
   const data = JSON.parse(fs.readFileSync('./data/identities.json'));
   const identity = data.find(identity => identity.walletAddress === walletAddress);
   if (!identity) {
