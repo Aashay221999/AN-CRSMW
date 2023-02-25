@@ -23,4 +23,15 @@ router.get("/retrieve", async function (req, res) {
   }
 });
 
+router.get("/retrieve/:walletAddress", async function (req, res) {
+  const { walletAddress } = req.params;
+  try {
+    //refirect to service
+    const response = await claimSigningService.getClaimsForIdentity(walletAddress);
+    res.send(response);
+  } catch (error) {
+    res.status(error.status || 500).send(error);
+  }
+});
+
 module.exports = router;

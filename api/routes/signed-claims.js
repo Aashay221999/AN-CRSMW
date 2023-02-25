@@ -54,4 +54,19 @@ router.delete("/:walletAddress", async (req, res) => {
   }
 });
 
+router.get("/:walletAddress", async (req, res) => {
+  const { walletAddress } = req.params;
+  try {
+    const claims = await getSignedClaimsForIdentity(walletAddress);
+    return res.status(200).json({
+      claims,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      error: "server error",
+    });
+  }
+});
+
 module.exports = router;

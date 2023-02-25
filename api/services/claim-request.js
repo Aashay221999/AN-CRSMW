@@ -67,6 +67,30 @@ class ClaimManager {
       throw error;
     }
   }
+
+  async getClaimsForIdentity() {
+    // eslint-disable-next-line no-useless-catch
+    try {
+      //logic here
+      console.log("getClaimsForIdentity service");
+      if (fs.existsSync("./data/claim-signing-request.json")) {
+        const data = fs.readFileSync("./data/claim-signing-request.json", {
+          encoding: "utf8",
+          flag: "r",
+        });
+        const identityClaims = JSON.parse(data).filter(
+          (c) => c.walletAddress == walletAddress
+        );
+        return JSON.parse(identityClaims);
+      } else {
+        return [];
+      }
+      // eslint-disable-next-line no-unreachable
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
 }
 
 module.exports = new ClaimManager();

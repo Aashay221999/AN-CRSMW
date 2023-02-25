@@ -45,8 +45,15 @@ async function deleteSignedClaim(walletAddress) {
   await fsPromises.writeFile(SIGNED_CLAIMS_PATH, updatedClaimsString, "utf-8");
 }
 
+async function getSignedClaimsForIdentity(walletAddress) {
+  const claims = await getSignedClaims();
+  const identityClaims = claims.filter((c) => c.walletAddress == walletAddress);
+  return identityClaims;
+}
+
 module.exports = {
   getSignedClaims,
   saveSignedClaim,
   deleteSignedClaim,
+  getSignedClaimsForIdentity
 };
